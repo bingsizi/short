@@ -1,9 +1,12 @@
 package com.project.base.user.service;
 
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import com.project.base.user.entity.User;
+import com.project.framework.controller.Page;
 import com.project.framework.service.BaseServiceImpl;
+import com.project.framework.util.StringUtil;
 import com.project.framework.util.security.MD5Util;
 
 /**  
@@ -34,5 +37,20 @@ public class UserService extends BaseServiceImpl<User,Long>{
 	public boolean isHasUser(){
 		long count = countResult("from User");
 		return count>0?true:false;
+	}
+	/**
+	 * 根据条件分页查询用户
+	 * @param page
+	 * @param username
+	 * @return
+	 * @author zhangpeiran 2016年5月4日 下午4:57:57
+	 */
+	public Page<User> findByPage(Page<User> page,String username){
+		if(StringUtil.isNullOrEmpty(username)){
+			return super.pageQuery(page);
+		}
+		else{
+			return super.pageQuery(page,Restrictions.like("username", username, MatchMode.ANYWHERE));
+		}
 	}
 }

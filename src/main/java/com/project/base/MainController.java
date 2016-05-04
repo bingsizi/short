@@ -1,11 +1,14 @@
 package com.project.base;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.base.user.entity.User;
+import com.project.framework.common.Constants;
 import com.project.framework.controller.BaseController;
 import com.project.framework.filter.WebContext;
 
@@ -18,7 +21,7 @@ import com.project.framework.filter.WebContext;
  * @date 2016年5月3日 上午10:55:25
  */
 @Controller
-public class IndexController extends BaseController {
+public class MainController extends BaseController {
 
 	@RequestMapping("login")
 	@ResponseBody
@@ -34,7 +37,11 @@ public class IndexController extends BaseController {
 	}
 	@RequestMapping("main")
 	public String main(){
-		System.out.println("提交做个测试");
 		return "main";
+	}
+	@RequestMapping("exitSystem")
+	public String exitSystem(HttpServletRequest request){
+		request.getSession().removeAttribute(Constants.LOGIN_USER);
+		return "login";
 	}
 }
