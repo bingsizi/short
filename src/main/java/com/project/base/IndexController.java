@@ -34,6 +34,7 @@ public class IndexController extends BaseController {
 	}
 	@RequestMapping("main")
 	public String main(){
+		System.out.println("提交做个测试");
 		return "main";
 	}
 }
