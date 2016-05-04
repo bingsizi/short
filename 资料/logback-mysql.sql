@@ -9,6 +9,8 @@
 # It is intended for MySQL databases. It has been tested on MySQL 5.1.37 
 # on Linux
 
+#查询logging_event 时转换时间
+#select from_unixtime(timestmp/1000) as date from logging_event order BY timestmp DESC
 
 BEGIN;
 DROP TABLE IF EXISTS logging_event_property;
