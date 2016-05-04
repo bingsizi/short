@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd">
+	
+	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+	<context:component-scan base-package="com.project">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+	
+	<bean id="applicationContextHolder" class="com.project.framework.context.ApplicationContextHolder" lazy-init="false"></bean>
+	
+	<!-- id must equals multipartResolver,otherwise framework cant work -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>1000485760</value>
+		</property>
+	</bean>
+	
+    <!-- Hibernate配置 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.project" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop> 
+            </props>
+        </property>
+    </bean>
+    
+    <!-- Hibernate 事务管理器配置,单数据源事务 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+    
+        
+    <!-- TransAction Manager ：注释配置声明事务管理 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	
+    <!-- 配置事务异常封装 -->
+    <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- production环境 -->
+	<beans profile="production">
+		<context:property-placeholder ignore-resource-not-found="true" location="classpath*:/dao.properties" />	
+		<!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
+		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+			<!-- Connection Info -->
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="maxActive" value="${jdbc.pool.maxActive}" />
+			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
+			<property name="minIdle" value="0" />
+			<!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
+			<property name="timeBetweenEvictionRunsMillis" value="60000" />
+			<property name="minEvictableIdleTimeMillis" value="600000" />
+		</bean>
+	</beans>
+	
+	<!-- local development环境 -->
+	<beans profile="development">
+		<context:property-placeholder ignore-resource-not-found="true"
+			location="classpath*:/application.properties,
+          			  classpath*:/application.development.properties" />	
+
+		<!-- Tomcat JDBC连接池 -->
+		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="defaultAutoCommit" value="false" />
+		</bean>
+	</beans>
+
+	
+	<!-- unit test环境 -->
+	<beans profile="test">
+		<context:property-placeholder ignore-resource-not-found="true"
+			location="classpath*:/application.properties,
+          			  classpath*:/application.test.properties" />	
+		
+		<!-- Spring Simple连接池 -->
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+			<property name="driverClass" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />	
+		</bean>
+			
+		<!-- 初始化数据结构与默认数据 -->
+		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+			<jdbc:script location="classpath:sql/h2/schema.sql" />
+			<jdbc:script location="classpath:data/h2/import-data.sql" encoding="UTF-8" />
+		</jdbc:initialize-database>
+	</beans>
+</beans>

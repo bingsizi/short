@@ -1,0 +1,146 @@
+#fileContainer{
+   margin: 20px;
+}
+#fileContainer .fileList::after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+#fileContainer .fileList {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+#fileContainer .fileList li {
+    background: rgba(0, 0, 0, 0) url("../image/bg.png") no-repeat scroll 0 0;
+    display: inline;
+    float: left;
+    font-size: 12px;
+    height: 110px;
+    margin: 0 8px 20px 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 110px;
+}
+#fileContainer .fileList li p.imgWrap {
+    height: 110px;
+    line-height: 110px;
+    overflow: hidden;
+    position: relative;
+    transform-origin: 50% 50% 0;
+    transition: all 200ms ease-out 0s;
+    vertical-align: middle;
+    width: 110px;
+    z-index: 2;
+    margin: 0px;
+}
+#fileContainer .fileList div.file-panel {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    height: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 300;
+}
+#fileContainer .file-panel span {
+    width: 24px;
+    height: 24px;
+    display: inline;
+    float: right;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../image/icons.png) no-repeat;
+    margin: 5px 1px 1px;
+    cursor: pointer;
+}
+#fileContainer .file-panel span.cancel {
+    background-position: -48px -24px;
+}
+#fileContainer .file-panel span.cancel:hover {
+    background-position: -48px 0;
+}
+#uploader{
+	min-width:500px;
+	padding:10px;
+	border:1px solid #CCC;
+	background:#fff;
+}
+#uploader .info{
+	color:#666;
+	padding:0 0 10px 10px;
+	border-bottom:1px solid #dfdfdf;
+}
+#uploader p{
+	padding:0 0 2px 10px;
+	font-size:12px;
+}
+#uploader p.state{
+	color:#cc8f14;
+}
+#uploader p.removeI{
+	width:80px;
+	height:20px;
+	text-align:center;
+	color:#000;
+	background:#F28585;
+	padding:3px 0;
+	cursor:pointer;
+}
+#uploader p.removeI:hover{
+	background:#22C1CB;
+	color:#fff;
+}
+#uploader .btn {
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 7px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+#uploader .btn-default {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+}
+.progress {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.progress.active .progress-bar, .progress-bar.active {
+    animation: 2s linear 0s normal none infinite running progress-bar-stripes;
+}
+.progress-striped .progress-bar, .progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
+.progress-bar {
+    background-color: #428bca;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
+    color: #fff;
+    float: left;
+    font-size: 12px;
+    height: 100%;
+    line-height: 20px;
+    text-align: center;
+    transition: width 0.6s ease 0s;
+    width: 0;
+}
