@@ -1,10 +1,12 @@
 package com.project.base.user.service;
 
+import javax.annotation.Resource;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import com.project.base.user.entity.User;
 import com.project.framework.controller.Page;
+import com.project.framework.dao.BaseDao;
 import com.project.framework.service.BaseServiceImpl;
 import com.project.framework.util.StringUtil;
 import com.project.framework.util.security.MD5Util;
@@ -18,6 +20,11 @@ import com.project.framework.util.security.MD5Util;
  */
 @Service
 public class UserService extends BaseServiceImpl<User,Long>{
+	
+	@Resource(name ="userDao")
+	public void setBaseDao(BaseDao<User,Long> baseDao) {
+		this.baseDao =  baseDao;
+	}
 	
 	/**
 	 * 验证用户登陆
@@ -35,7 +42,7 @@ public class UserService extends BaseServiceImpl<User,Long>{
 	 * @author zhangpeiran 2016年5月4日 下午1:56:26
 	 */
 	public boolean isHasUser(){
-		long count = countResult("from User");
+		long count = super.countResult(baseDao.createCriteria());
 		return count>0?true:false;
 	}
 	/**

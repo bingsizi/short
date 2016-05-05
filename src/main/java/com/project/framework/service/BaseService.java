@@ -7,7 +7,6 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.project.framework.controller.Page;
 
 
@@ -19,6 +18,7 @@ import com.project.framework.controller.Page;
  * @date 2016年5月3日 下午3:30:15
  */
 public interface BaseService<T, ID extends Serializable> {
+
 	T find(ID id);
 	List<T> findAll();
 	@Transactional(rollbackFor=RuntimeException.class)

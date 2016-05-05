@@ -3,7 +3,6 @@ package com.project.framework.service;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -19,8 +18,8 @@ import com.project.framework.dao.BaseDao;
  */
 public class BaseServiceImpl <T, ID extends Serializable> implements BaseService<T,ID>{
 	
-	@Resource
-	protected BaseDao<T, ID> baseDao;
+	protected BaseDao<T,ID> baseDao;
+	
 	
 	@Override
 	public T find(ID id) {
@@ -78,6 +77,7 @@ public class BaseServiceImpl <T, ID extends Serializable> implements BaseService
 		return baseDao.findPage(page, criterions, orders);
 	}
 	@Override
+	@Deprecated
 	public long countResult(String queryString, Object... values) {
 		return baseDao.countResult(queryString, values);
 	}

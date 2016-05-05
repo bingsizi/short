@@ -18,7 +18,9 @@ package com.project.framework.dao;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.ObjectNotFoundException;
@@ -65,6 +67,7 @@ class GenericDao<T, ID extends Serializable> {
 	 */
 	public GenericDao() {
 		this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
+		System.out.println(entityClass.getName());
 	}
 
 	/**

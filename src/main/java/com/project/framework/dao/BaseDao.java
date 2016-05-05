@@ -32,7 +32,6 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.internal.CriteriaImpl.OrderEntry;
 import org.hibernate.transform.ResultTransformer;
-import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import com.project.framework.controller.Page;
 import com.project.framework.util.ReflectionUtils;
@@ -50,7 +49,6 @@ import com.project.framework.util.ReflectionUtils;
  * @author ray
  */
 @SuppressWarnings("unchecked")
-@Repository
 public class BaseDao<T, ID extends Serializable> extends GenericDao<T, ID> {
 	/**
 	 * 用于Dao层子类使用的构造函数.
