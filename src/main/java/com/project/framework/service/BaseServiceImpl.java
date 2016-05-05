@@ -16,7 +16,7 @@ import com.project.framework.dao.BaseDao;
  * @version 
  * @date 2016年5月3日 下午4:03:44
  */
-public class BaseServiceImpl <T, ID extends Serializable> implements BaseService<T,ID>{
+public class BaseServiceImpl <T, ID extends Serializable> extends BaseService<T,ID>{
 	
 	protected BaseDao<T,ID> baseDao;
 	
@@ -39,54 +39,54 @@ public class BaseServiceImpl <T, ID extends Serializable> implements BaseService
 	}
 	@Override
 	@Deprecated
-	public int executeUpdate(String queryString, Object... values) {
+	protected int executeUpdate(String queryString, Object... values) {
 		return baseDao.executeUpdate(queryString, values);
 	}
 	@Override
-	public int executeUpdate(String queryString, Map<String, Object> values) {
+	protected int executeUpdate(String queryString, Map<String, Object> values) {
 		return baseDao.executeUpdate(queryString, values);
 	}
 	@Override
-	public List<T> query(String hql, Map<String, Object> args) {
+	protected List<T> query(String hql, Map<String, Object> args) {
 		return baseDao.executeQuery(hql, args);
 	}
 	@Override
 	@Deprecated
-	public List<T> query(String hql, Object... args) {
+	protected List<T> query(String hql, Object... args) {
 		return baseDao.executeQuery(hql, args);
 	}
 	@Override
-	public List<T> query(Criterion...criterions){
+	protected List<T> query(Criterion...criterions){
 		return baseDao.executeQuery(criterions);
 	}
 	@Override
-	public Page<T> pageQuery(Page<T> page, String hql, Map<String, Object> args) {
+	protected Page<T> pageQuery(Page<T> page, String hql, Map<String, Object> args) {
 		return baseDao.findPage(page, hql, args);
 	}
 	@Override
 	@Deprecated
-	public Page<T> pageQuery(Page<T> page, String hql, Object... args) {
+	protected Page<T> pageQuery(Page<T> page, String hql, Object... args) {
 		return baseDao.findPage(page, hql, args);
 	}
 	@Override
-	public Page<T> pageQuery(Page<T> page, Criterion... criterions) {
+	protected Page<T> pageQuery(Page<T> page, Criterion... criterions) {
 		return baseDao.findPage(page, criterions);
 	}
 	@Override
-	public Page<T> pageQuery(Page<T> page, Criterion[] criterions, Order... orders) {
+	protected Page<T> pageQuery(Page<T> page, Criterion[] criterions, Order... orders) {
 		return baseDao.findPage(page, criterions, orders);
 	}
 	@Override
 	@Deprecated
-	public long countResult(String queryString, Object... values) {
+	protected long countResult(String queryString, Object... values) {
 		return baseDao.countResult(queryString, values);
 	}
 	@Override
-	public long countResult(String queryString, Map<String, ?> values) {
+	protected long countResult(String queryString, Map<String, ?> values) {
 		return baseDao.countResult(queryString, values);
 	}
 	@Override
-	public int countResult(Criteria c) {
+	protected int countResult(Criteria c) {
 		return baseDao.countResult(c);
 	}
 	@Override
