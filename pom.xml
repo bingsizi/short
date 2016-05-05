@@ -9,12 +9,12 @@
   <url>http://maven.apache.org</url>
   
   <dependencies>
-	    <dependency>
-	      <groupId>junit</groupId>
-	      <artifactId>junit</artifactId>
-	      <version>3.8.1</version>
-	      <scope>test</scope>
-	    </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
 	    <!-- common lang -->
 	    <dependency>
 			<groupId>org.apache.commons</groupId>
@@ -37,6 +37,11 @@
 		  <version>1.8.3</version>
 		</dependency>
 		<!-- springframework-->
+		<dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-test</artifactId>
+		  <version>4.2.0.RELEASE</version>
+		</dependency>
 		<dependency>
 		  <groupId>org.springframework</groupId>
 		  <artifactId>spring-core</artifactId>
