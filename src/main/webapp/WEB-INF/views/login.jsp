@@ -8,24 +8,24 @@
 <title>登陆页面</title>
 <script type="text/javascript">
 function submitForm(){
-    $('#submitForm').form('submit',{
-    	url:'${ctx}/login',
-        onSubmit:function(){
-            var flag =  $(this).form('enableValidation').form('validate');
-            if(!flag){
-            	alert("用户名或密码不能为空");
-            }
-            return flag;
-        },
-        success:function(data){
-        	var obj = JSON.parse(data);
-        	if(obj.success){
-        		location.href="${ctx}/main";
-        	}else{
-        		alert(obj.message);
-        	}
-        }
-    });
+	var isValid = $("#submitForm").form('validate');
+	if(isValid){
+		$.ajax({
+			  url: '${ctx}/login',
+			  dataType: 'json',
+			  type:'post',
+			  data: $("#submitForm").serialize(),
+			  success: function(data){
+				  if(data.success){
+		        		location.href="${ctx}/main";
+		          }else{
+		        		alert(data.message);
+		          }
+			  }
+		});
+	}else{
+	    alert("用户名或密码不能为空");
+	}
 }
 function clearForm(){
     $('#submitForm').form('clear');
@@ -36,7 +36,7 @@ $(function(){
 </script>
 </head>
 <body>
-    <div id="win" class="easyui-window" title="登陆" data-options="modal:true" style="width:400px;padding:10px;">
+    <div id="win" class="easyui-window" title="登陆" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closable:false" style="width:400px;padding:10px;">
         <div style="padding:10px 60px 20px 60px">
 	        <form id="submitForm">
 	            <table cellpadding="5">
