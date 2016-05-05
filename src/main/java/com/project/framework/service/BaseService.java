@@ -19,12 +19,15 @@ import com.project.framework.controller.Page;
  */
 public abstract class BaseService<T, ID extends Serializable> {
 
+	/*******公用的*********/
 	public abstract T find(ID id);
 	public abstract List<T> findAll();
 	@Transactional(rollbackFor=RuntimeException.class)
 	public abstract void save(T entity);
 	@Transactional(rollbackFor=RuntimeException.class)
 	public abstract void removeById(ID id);
+    public abstract boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue);
+    /*******继承可用*******/
 	@Transactional(rollbackFor=RuntimeException.class)
 	protected abstract int executeUpdate(final String queryString, final Object... values);
 	@Transactional(rollbackFor=RuntimeException.class)
@@ -39,5 +42,4 @@ public abstract class BaseService<T, ID extends Serializable> {
 	protected abstract long countResult(final String queryString, final Object... values);
 	protected abstract long countResult(final String queryString, final Map<String, ?> values);
 	protected abstract  int countResult(final Criteria c);
-    public abstract boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue);
 }

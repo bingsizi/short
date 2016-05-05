@@ -20,7 +20,6 @@ public class BaseServiceImpl <T, ID extends Serializable> extends BaseService<T,
 	
 	protected BaseDao<T,ID> baseDao;
 	
-	
 	@Override
 	public T find(ID id) {
 		return baseDao.findById(id);
@@ -36,6 +35,10 @@ public class BaseServiceImpl <T, ID extends Serializable> extends BaseService<T,
 	@Override
 	public void removeById(ID id) {
 		baseDao.deleteById(id);
+	}
+	@Override
+	public boolean isPropertyUnique(String propertyName, Object newValue, Object oldValue) {
+		return baseDao.isPropertyUnique(propertyName, newValue, oldValue);
 	}
 	@Override
 	@Deprecated
@@ -88,10 +91,6 @@ public class BaseServiceImpl <T, ID extends Serializable> extends BaseService<T,
 	@Override
 	protected int countResult(Criteria c) {
 		return baseDao.countResult(c);
-	}
-	@Override
-	public boolean isPropertyUnique(String propertyName, Object newValue, Object oldValue) {
-		return baseDao.isPropertyUnique(propertyName, newValue, oldValue);
 	}
 
 }
