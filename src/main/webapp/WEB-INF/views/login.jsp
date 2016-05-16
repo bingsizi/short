@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/common/jqueryEasyUi.jsp"%>
+<script type="text/javascript" src="${ctx}/static/js/top.pup.js"></script>
 <title>登陆页面</title>
 <script type="text/javascript">
 function submitForm(){
@@ -47,6 +48,10 @@ $(function(){
 	                <tr>
 	                    <td>密码:</td>
 	                    <td><input class="easyui-textbox" type="password" name="password" data-options="required:true,validType:'password'"></input></td>
+	                </tr>
+	                <tr>
+	                    <td>记住我:</td>
+	                    <td><input type="checkbox" value="true" name="remember"></td>
 	                </tr>
 	            </table>
 	        </form>

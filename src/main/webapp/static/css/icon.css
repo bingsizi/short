@@ -1,0 +1,23 @@
+/** 用户管理 **/
+.icon-user{
+    background: url("../images/icons/user_16.png") no-repeat scroll 0 0 transparent;
+}
+/** 组织机构管理 **/
+.icon-org{
+    background: url("../images/icons/org_16.png") no-repeat scroll 0 0 transparent;
+}
+/** 角色管理 **/
+.icon-role{
+    background: url("../images/icons/role_16.png") no-repeat scroll 0 0 transparent;
+}
+/** 菜单管理 **/
+.icon-menu{
+    background: url("../images/icons/menu_16.png") no-repeat scroll 0 0 transparent;
+}
+/** 在线用户 **/
+.icon-online{
+    background: url("../images/icons/online_16.png") no-repeat scroll 0 0 transparent;
+}
+/**全部展开或全部折叠**/
+.icon-expand-all{background:url(../images/icons/expand-all.gif) no-repeat;}
+.icon-collapse-all{background:url(../images/icons/collapse-all.gif) no-repeat;}

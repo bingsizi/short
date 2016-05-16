@@ -52,7 +52,24 @@
     
         
     <!-- TransAction Manager ：注释配置声明事务管理 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/> -->
+	
+    <!-- 事物aop  -->
+	<aop:config>
+		<aop:pointcut id="crudMethods" expression="execution(* com.project.base.security.*.service.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="crudMethods"/>
+	</aop:config> 
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+			<tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+			<tx:method name="*" propagation="SUPPORTS"/>
+		</tx:attributes>
+	</tx:advice>
 	
     <!-- 配置事务异常封装 -->
     <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />

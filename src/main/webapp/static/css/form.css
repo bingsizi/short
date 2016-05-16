@@ -1,0 +1,25 @@
+.oper_table {
+	border-left: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+}
+
+.oper_table input[type=text], select {
+	padding: 2px 0;
+}
+
+.oper_table input[type=button] {
+	padding: 2px;
+}
+
+.td_marked {
+	background: none repeat scroll 0 0 #F5FAFA;
+	border-bottom: 1px solid #C1DAD7;
+	border-right: 1px solid #C1DAD7;
+	padding: 6px;
+}
+
+.td_content {
+	border-bottom: 1px solid #C1DAD7;
+	border-right: 1px solid #C1DAD7;
+	padding: 6px;
+}

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.project.base.user.entity.User;
 import com.project.framework.filter.WebContext;
 import com.project.framework.service.ServiceManager;
 import com.project.framework.util.FileNameTool;
@@ -27,15 +26,6 @@ public class BaseController {
 	@Resource
 	protected ServiceManager serviceManager;
 
-	/**
-	 * 获取当前登录用户
-	 * @return
-	 * @author gql 2015-9-21 下午3:18:08
-	 */
-	protected User getCurrentUser(){
-		return WebContext.getLoginUser();
-	}
-	
 	/**
 	 * 返回成功信息
 	 * 

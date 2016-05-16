@@ -6,9 +6,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.project.base.user.entity.User;
-import com.project.framework.common.Constants;
-
 
 public class WebContext {
 	
@@ -56,28 +53,5 @@ public class WebContext {
 	 */
 	public static String getWebPath(){
 		return getRequest().getScheme() + "://" + getRequest().getServerName()+ ":" + getRequest().getServerPort() + getRequest().getContextPath();
-	}
-	/**
-	 * 获取登陆用户
-	 * @return
-	 * @author gql 2015-9-18 下午4:37:39
-	 */
-	public static User getLoginUser(){
-		HttpServletRequest request = getRequest();
-		if(null == request){
-			return null;
-		}
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute(Constants.LOGIN_USER);
-		return user;
-	}
-	/**
-	 * 设置登陆用户
-	 * @param user
-	 * @author gql 2015-9-18 下午4:38:50
-	 */
-	public static void setLoginUser(User user){
-		HttpSession session = getRequest().getSession();
-		session.setAttribute(Constants.LOGIN_USER,user);
 	}
 }
