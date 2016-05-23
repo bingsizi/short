@@ -91,6 +91,7 @@ public class MenuController extends BaseController{
 	    	oldMenu.setPermission(menu.getPermission());
 	    	oldMenu.setMethodName(menu.getMethodName());
 	        oldMenu.setType(menu.getType());
+	        oldMenu.setIcon(menu.getIcon());
 	    	//增加菜单
 	    	serviceManager.menuService.save(oldMenu);
 	    	return getSuccessMsg("修改菜单成功,菜单名称为:"+menu.getName());

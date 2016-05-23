@@ -64,6 +64,7 @@ $(function(){
             {field:"id", title:"ID", width:10},
 			{field:"name", title:"名称", width:10},
 			{field:"type", title:"类型", width:10},
+			{field:"icon", title:"图标", width:10},
 			{field:"indexUrl", title:"响应地址", width:10},
 			{field:"permission", title:"权限",width:10},
 			{field:"parentId", title:"上级菜单",width:10},
