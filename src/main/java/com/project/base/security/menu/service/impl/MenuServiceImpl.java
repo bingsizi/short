@@ -49,11 +49,15 @@ public class MenuServiceImpl implements MenuService {
 	 */
 	@Override
 	public void save(Menu menu) {
-		if (menu.getParentId() != null) {
+		if(menu.getParentId()!=null){
 			Menu pareMenu = find(menu.getParentId());
-			if (pareMenu != null) {
-				String parentIds = (StringUtils.isNoneBlank(pareMenu.getParentIds()) ? pareMenu.getParentIds() : "")
-						+ pareMenu.getId() + "/";
+			if(pareMenu!=null){
+				String parentIds = "";
+				if(StringUtils.isNoneBlank(pareMenu.getParentIds())){
+					parentIds = pareMenu.getParentIds()+pareMenu.getId()+"/";
+				}else{
+					parentIds = "/"+pareMenu.getId()+"/";
+				}
 				menu.setParentIds(parentIds);
 			}
 		}

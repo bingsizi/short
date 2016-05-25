@@ -44,7 +44,7 @@ public class InitService implements ApplicationListener<ContextRefreshedEvent> {
 				systemTop.setType(MenuType.菜单);
 				serviceManagerManager.menuService.save(systemTop);
 				/******系统菜单的子菜单*******************/
-				String systemTopParentIds =systemTop.getId()+"/";
+				String systemTopParentIds ="/"+systemTop.getId()+"/";
 				
 				Menu userManager = new Menu();
 				userManager.setName("用户管理");

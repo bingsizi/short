@@ -40,7 +40,12 @@ public class OrganizationServiceImpl implements OrganizationService{
 		if(org.getParentId()!=null){
 			Organization parentOrg = find(org.getParentId());
 			if(parentOrg!=null){
-				String parentIds = (StringUtils.isNoneBlank(parentOrg.getParentIds())?parentOrg.getParentIds():"")+parentOrg.getId()+"/";
+				String parentIds = "";
+				if(StringUtils.isNoneBlank(parentOrg.getParentIds())){
+					parentIds = parentOrg.getParentIds()+parentOrg.getId()+"/";
+				}else{
+					parentIds = "/"+parentOrg.getId()+"/";
+				}
 				org.setParentIds(parentIds);
 			}
 		}
